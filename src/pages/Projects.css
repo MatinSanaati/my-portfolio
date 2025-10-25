@@ -1,0 +1,432 @@
+/* === پروژه‌ها و فیلتر === */
+.projects-intro {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-inline: auto;
+}
+
+.projects-filter {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: var(--spacing-lg) auto var(--spacing-xl);
+    max-width: 800px;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.25rem;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-btn:hover {
+    background: var(--accent-color);
+    color: white;
+}
+
+.filter-btn.active {
+    background: var(--accent-color);
+    color: white;
+    box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 350px));
+    gap: 2rem;
+    justify-items: start;
+    align-items: center;
+}
+
+/* === باکس پروژه === */
+.project-box {
+    background-color: var(--border-color);
+    position: relative;
+    width: 100%;
+    height: 220px;
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-box:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 22px rgba(67, 97, 238, 0.25);
+}
+
+.project-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+    transition: filter 0.4s ease;
+}
+
+.project-box:hover .project-video {
+    filter: brightness(0.3) blur(5px);
+}
+
+/* === overlay محتوا با slide-up === */
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 0;
+    pointer-events: none;
+}
+
+.overlay-content {
+    background-color: var(--btn-modal-close);
+    width: 100%;
+    padding: 1.2rem;
+    text-align: center;
+    border-radius: 0 0 18px 18px;
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: auto;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+}
+
+.project-box:hover .overlay-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.project-title {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.project-category {
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    opacity: 0.85;
+    margin-bottom: 0.5rem;
+}
+
+.btn-light {
+    border: 1px solid var(--bg-secondary);
+    background-color: transparent;
+    color: var(--bg-secondary);
+    padding: 0.45rem 0.9rem;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.project-modal {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.808);
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 2rem;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-tech-section {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-primary);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.modal-tech-section h4 {
+    font-size: 1rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.modal-tech-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.modal-tech-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content {
+    position: relative;
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    width: 90vw;
+    height: 90vh;
+    max-width: 1200px;
+    max-height: 900px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+    animation: popUp 0.35s ease;
+}
+
+.modal-close {
+    z-index: 9999;
+    position: absolute;
+    background-color: var(--btn-modal-close);
+    top: .5rem;
+    right: .5rem;
+    border: none;
+    color: var(--text-modal-close);
+    font-size: 1rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    color: white;
+    background: var(--accent-color);
+    transform: scale(1.1);
+}
+
+.modal-video-wrapper {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0;
+    transition: transform 0.3s ease;
+}
+
+.modal-info {
+    flex-shrink: 0;
+    overflow: auto;
+    max-height: 35%;
+    padding: 1rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.modal-info::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-info h3 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.modal-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.modal-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-tag {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+.tech-tag:hover {
+    transform: scale(1.05);
+}
+
+.modal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.8rem;
+}
+
+.modal-links .btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.modal-links .btn-outline {
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    background: transparent;
+}
+
+.modal-links .btn-outline:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: max-content;
+    max-width: 200px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    text-align: center;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    font-size: 0.8rem;
+    line-height: 1.3;
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+    white-space: normal;
+}
+
+.tooltip-wrapper:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+.tooltip-text::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--bg-secondary) transparent transparent transparent;
+}
+
+/* موبایل */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95vw;
+        height: 85vh;
+        border-radius: 12px;
+    }
+
+    .modal-info {
+        max-height: 45%;
+        padding: 0.8rem;
+    }
+}
+
+/* responsive */
+@media (max-width: 480px) {
+    .tooltip-text {
+        font-size: 0.75rem;
+        max-width: 150px;
+    }
+}
+
+/* انیمیشن‌ها */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+    .modal-video-wrapper {
+        max-height: 450px;
+    }
+
+    .modal-info {
+        padding: 0.8rem 1rem;
+    }
+
+    .modal-info h3 {
+        font-size: 1.15rem;
+    }
+
+    .modal-description {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-video-wrapper {
+        max-height: 300px;
+    }
+
+    .modal-info h3 {
+        font-size: 1rem;
+    }
+
+    .modal-description {
+        font-size: 0.8rem;
+    }
+
+    .modal-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

@@ -1,0 +1,41 @@
+.toggle-menu-icon {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  fill: var(--text-primary); /* رنگ بر اساس تم */
+  transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+/* خطوط منو برای انیمیشن */
+.toggle-menu-icon .line1,
+.toggle-menu-icon .line2,
+.toggle-menu-icon .line3 {
+  transition: transform 0.3s ease, fill 0.3s ease, opacity 0.3s ease;
+  fill: var(--text-primary); /* هماهنگی با تم */
+}
+
+/* حالت hover */
+.toggle-menu-icon:hover {
+  transform: scale(1.1);
+}
+
+/* حالت فعال (باز شدن منو) */
+.toggle-menu-icon.active .line1 {
+  transform: translateY(200px) rotate(45deg);
+}
+
+.toggle-menu-icon.active .line2 {
+  opacity: 0;
+}
+
+.toggle-menu-icon.active .line3 {
+  transform: translateY(-200px) rotate(-45deg);
+}
+
+/* ریسپانسیو */
+@media (max-width: 480px) {
+  .toggle-menu-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
