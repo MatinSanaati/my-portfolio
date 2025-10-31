@@ -2,52 +2,58 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Projects.css";
 
+import videoDashboardBehtime from "../assets/videos/projects/داشبودر مدیریتی بهتایم.mp4";
+import videoDigitalStore from "../assets/videos/projects/فروشگاه دیجیتالی موبایل شاپ.mp4";
+import videoUserPanel from "../assets/videos/projects/داشبورد تحلیل آمار سایت.mp4";
+import videoAdminPanel from "../assets/videos/projects/داشبورد تحلیل آمار سایت.mp4";
+
 const projects = [
   {
     id: 1,
     title: "مدیر پروژه شخصی",
-    description: "یک اپلیکیشن تعاملی ...",
+    description: "یک اپلیکیشن تعاملی برای مدیریت وظایف و پروژه‌های شخصی شما.",
     tech: ["React", "Redux Toolkit", "CSS"],
     liveLink: "#",
-    codeLink: "https://github.com/yourusername/personal-project-tracker",
+    codeLink: "https://github.com/MatinSanaati/Management-Panel",
     category: "مدیریت",
-    video: "/public/videos/projects/داشبودر مدیریتی بهتایم.mp4",
+    video: videoDashboardBehtime,
   },
   {
     id: 2,
     title: "فروشگاه دیجیتالی",
-    description: "فروشگاهی برای محصولات دیجیتالی ...",
+    description: "فروشگاهی برای محصولات دیجیتالی با فیلتر، جست‌وجو و سبد خرید.",
     tech: ["React", "Context API", "CSS"],
-    liveLink: "#",
-    codeLink: "https://github.com/yourusername/digital-store",
+    liveLink: "",
+    codeLink: "https://github.com/MatinSanaati/Digi-Tali-Store",
     category: "فروشگاهی",
-    video: "/public/videos/projects/فروشگاه دیجیتالی موبایل شاپ.mp4",
+    video: videoDigitalStore,
   },
   {
     id: 3,
     title: "پنل کاربر",
-    description: "نمایش داده‌های ساختگی با چارت‌های تعاملی ...",
+    description:
+      "پنل نمایش داده‌های ساختگی با چارت‌های تعاملی و طراحی ریسپانسیو.",
     tech: [
       "Vite",
-      "React (React Router DOM v6) + TypeScript",
-      "Ridux Toolkit",
-      "Tailwind CSS v4",
-      "CSS Modules",
+      "React (React Router DOM v6)",
+      "TypeScript",
+      "Redux Toolkit",
+      "Tailwind CSS",
     ],
     liveLink: "https://user-panel-5gnf.vercel.app/",
     codeLink: "https://github.com/MatinSanaati/Management-Panel",
     category: "داشبورد",
-    video: "/public/videos/projects/داشبورد تحلیل آمار سایت.mp4",
+    video: videoUserPanel,
   },
   {
     id: 4,
     title: "پنل مدیریت",
-    description: "نمایش داده‌های ساختگی با چارت‌های تعاملی ...",
-    tech: ["Vite", "React", "Ridux", "CSS3", "TypeScript"],
+    description: "پنل مدیریتی حرفه‌ای با داشبوردهای تعاملی و داده‌های ساختگی.",
+    tech: ["Vite", "React", "Redux", "CSS3", "TypeScript"],
     liveLink: "https://management-panel-nu.vercel.app/",
     codeLink: "https://github.com/MatinSanaati/User-panel",
     category: "داشبورد",
-    video: "/public/videos/projects/داشبورد تحلیل آمار سایت.mp4",
+    video: videoAdminPanel,
   },
 ];
 
@@ -62,8 +68,7 @@ const Projects = () => {
       ? projects
       : projects.filter((p) => p.category === activeCategory);
 
-  if (selectedProject) document.body.style.overflow = "hidden";
-  else document.body.style.overflow = "auto";
+  document.body.style.overflow = selectedProject ? "hidden" : "auto";
 
   return (
     <main className="projects-page">
@@ -74,7 +79,6 @@ const Projects = () => {
             اینجا چند نمونه از پروژه‌هایی که با عشق و دقت ساخته‌ام رو می‌بینید.
           </p>
 
-          {/* فیلتر دسته‌بندی */}
           <div className="projects-filter">
             {categories.map((category) => (
               <button
@@ -89,7 +93,6 @@ const Projects = () => {
             ))}
           </div>
 
-          {/* باکس‌های پروژه با انیمیشن */}
           <div className="projects-grid">
             <AnimatePresence>
               {filteredProjects.map((project) => (
@@ -127,7 +130,6 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* مدال جزئیات */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -169,11 +171,8 @@ const Projects = () => {
 
                 <div className="modal-tech-section">
                   <h4>تکنولوژی‌های استفاده شده</h4>
-                  <br />
                   <p className="modal-tech-text">
-                    این پروژه با استفاده از تکنولوژی‌های زیر ساخته شده است
-                    <br />
-                    {selectedProject.tech.join(", ")}
+                    {selectedProject.tech.join("، ")}
                   </p>
                 </div>
 
@@ -192,12 +191,12 @@ const Projects = () => {
 
                   <div className="tooltip-wrapper">
                     <a
-                      href={selectedProject.liveLink}
+                      href={selectedProject.liveLink || "#"}
                       target="_blank"
                       rel="noreferrer"
                       className="btn btn-primary"
                     >
-                      مشاهده نمونه کار
+                      مشاهده پروژه
                     </a>
                     <span className="tooltip-text">مشاهده پروژه</span>
                   </div>
