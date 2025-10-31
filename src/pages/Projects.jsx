@@ -23,7 +23,7 @@ const projects = [
     title: "فروشگاه دیجیتالی",
     description: "فروشگاهی برای محصولات دیجیتالی با فیلتر، جست‌وجو و سبد خرید.",
     tech: ["React", "Context API", "CSS"],
-    liveLink: "",
+    liveLink: "https://digi-tali-store.vercel.app/",
     codeLink: "https://github.com/MatinSanaati/Digi-Tali-Store",
     category: "فروشگاهی",
     video: videoDigitalStore,
