@@ -7,6 +7,7 @@ export default defineConfig({
   build: {
     outDir: "dist", // ✅ مطمئن شو که خروجی توی dist باشه
     emptyOutDir: true, // ✅ قبل از بیلد، فولدر dist رو پاک کنه (برای جلوگیری از فایل‌های باقی‌مانده)
+    assetsDir: "assets", // ✅ مطمئن شو که assets توی dist/assets باشه
   },
   server: {
     port: process.env.PORT || 3000,
